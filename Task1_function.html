@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commernce with function</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <section>
+        <div id="printdata">
+
+        </div>
+    </section>
+</body>
+</html>
+<script>
+    let allproducts = [];
+    function getProducts () {
+        fetch('https://dummyjson.com/products')
+            .then((res) => {
+                if(!res.ok) throw new Error(console.log("Response Failed"));
+                    return res.json()
+            })
+            .then((data) => {
+                const printall = document.getElementById("printdata");
+                data.products.forEach((showalldata) => {
+                    const creatediv = document.createElement("div");
+                    creatediv.innerHTML = ``
+                });
+            })
+            .catch((err) => {
+                console.log("Something Error");
+            })
+    }
+    getProducts();
+    function displayProduct () {
+        fetch('https://dummyjson.com/products')
+    }
+</script>

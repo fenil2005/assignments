@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Product Page</title>
+    <style>
+        .card{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 80px;
+        }
+        .photo{
+            width: 400px;
+            height: 400px; 
+            border: 1px solid black;
+            border-radius: 8px;
+        }
+        .photo img{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .card p{
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div id="oneproduct" class="product-details">
+
+        </div>
+    </section>
+</body>
+</html>
+<script>
+    const querystr = window.location.search;
+    const formaturl = new URLSearchParams(querystr);
+    const newthing = formaturl.get("id");
+     fetch(`https://dummyjson.com/products/${newthing}`)
+        .then((res) => {
+            if(!res.ok) throw new Error(console.log("Response Failed"));
+                return res.json();
+        })
+        .then((data1) => {
+            const oneproinfo = document.getElementById("oneproduct");
+            const createnewdiv = document.createElement("createnewdiv");
+            createnewdiv.innerHTML = 
+                `
+                    <div class="card">
+                        <div class="photo">
+                        <img src="${data1.images[0]}">
+                        </div>
+                        <div>
+                        <p>${data1.title}</p>
+                        </div>
+                        <p>${data1.description}</p>
+                    </div>
+                `
+            oneproinfo.appendChild(createnewdiv);
+        })
+</script>
