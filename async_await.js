@@ -9,7 +9,7 @@
 //     console.log(bhatt);
 //     // async function displayFenil() {
 //     //    const bhatt = await fenil();
-//     //    console.log(bhatt); 
+//     //    console.log(bhatt);
 //     // }
 
 // async function waitTwoSeconds() {
@@ -42,30 +42,30 @@
 
 // }
 // fenil1();
-function fenil1() {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve([1, "Fenil", "Bhatt"]);
-        }, 4000)
-    })
-}
-function fenil2() {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            reject([2, "Amit", "Bhatt"]);
-        }, 3000)
-    })
-}
-async function bhatt() {
-    try {
-        const [abc, xyz] = await Promise.any([fenil1(), fenil2()]);
-        console.log(abc);
-        console.log(xyz);
-    } catch (error) {
-        console.log("Something Error", error);
-    }
-}
-bhatt();
+// function fenil1() {
+//     return new Promise((resolve, reject) => {
+//         setTimeout(() => {
+//             resolve([1, "Fenil", "Bhatt"]);
+//         }, 4000)
+//     })
+// }
+// function fenil2() {
+//     return new Promise((resolve, reject) => {
+//         setTimeout(() => {
+//             reject([2, "Amit", "Bhatt"]);
+//         }, 3000)
+//     })
+// }
+// async function bhatt() {
+//     try {
+//         const [abc, xyz] = await Promise.any([fenil1(), fenil2()]);
+//         console.log(abc);
+//         console.log(xyz);
+//     } catch (error) {
+//         console.log("Something Error", error);
+//     }
+// }
+// bhatt();
 
 
 // function bhatt1() {
@@ -100,3 +100,55 @@ bhatt();
 //     .catch((err) => {
 //         console.log("Something Error", err);
 //     })
+
+
+// Task - 6 
+
+// function fenil1() {
+//     return new Promise((resolve, reject) => {
+//         resolve("Fenil 1 reslove");
+//     })
+// }
+// function fenil2() {
+//     return new Promise((resolve, reject) => {
+//         reject("Fenil 2 reject");
+//     })
+// }
+
+// async function bhatt1() {
+//     try {
+//         const [abc, xyz] = await Promise.allSettled([fenil1(), fenil2()]);
+//         console.log(abc);
+//         console.log(xyz);
+//     } catch (error) {
+//         console.log("Something Error", error);
+//     }
+// }
+// bhatt1();
+
+async function fenil1() {
+    try {
+        const response = await fetch('https://dummyjson.com/products')
+        if (!response.ok) throw new Error("Response Not Found")
+        console.log(response);
+        const data = await response.json();
+
+        const prodis = document.getElementById("productdisplay");
+        data.products.forEach((showalldata) => {
+            const newdiv = document.createElement("newdiv");
+            newdiv.innerHTML =
+                `<div class="card">
+                        <a href="http://127.0.0.1:5500/Register/Fenil_Promise/bhatt2.html?id=${showalldata.id}">
+                            <img src="${showalldata.images[0]}">
+                            <p>${showalldata.title}</p>
+                        </a>
+                    </div>
+                `
+            prodis.appendChild(newdiv);
+        });
+
+    } catch (err) {
+        console.log("Something Error", err);
+    }
+}
+fenil1();
